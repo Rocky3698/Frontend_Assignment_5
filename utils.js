@@ -33,35 +33,49 @@ function createHistory(amount, title) {
     historyContainer.appendChild(history);
 }
 
+
+function validate(amount,balance) {
+    if (amount == '') {
+        alert('Please Enter a valid Amount');
+        return false;
+    }
+    if (isNaN(amount)) {
+        alert('Invalid Amount. Amount must be positive Integer');
+        return false;
+    }
+
+    amount = parseFloat(amount);
+    balance - parseFloat(balance);
+    if (amount > balance) {
+        alert("Insufficient Balance!");
+        return false;
+    }
+    if (amount <= 0) {
+        alert('Amount must be positive');
+        return false;
+    }
+    return true;
+}
+
 function handleNoakhaliDonation(event) {
     event.preventDefault()
     let amount = document.getElementById('noakhaliDonationAmount').value;
     let balance = parseFloat(document.getElementById('balance').innerText);
-    if (amount == '') {
-        alert('Please Enter a valid Amount');
-        return;
-    }
-
     document.getElementById('noakhaliDonationAmount').value = '';
-    if (isNaN(amount)) {
-        alert('Invalid Amount. Amount must be positive Integer');
-        return;
-    }
+
+    if (!validate(amount,balance)) return;
+
     amount = parseFloat(amount);
-    if (amount > balance) {
-        alert("Insufficient Balance!");
-        return;
-    }
-    if (amount <= 0) {
-        alert('Amount must be positive');
-        return;
-    }
+
     let totalDonation = document.getElementById('noakhaliDonatedAmount').innerText;
     totalDonation = parseFloat(totalDonation)
+
     document.getElementById('noakhaliDonatedAmount').innerText = amount + totalDonation
     document.getElementById('balance').innerText = balance - amount;
+
     const title = document.getElementById('NoakhaliTitle').innerText;
-    createHistory(amount,title);
+    createHistory(amount, title);
+
     document.getElementById('modal').show();
 }
 
@@ -69,30 +83,21 @@ function handleFeniDonation(event) {
     event.preventDefault()
     let amount = document.getElementById('feniDonationAmount').value;
     let balance = parseFloat(document.getElementById('balance').innerText);
-    if (amount == '') {
-        alert('Please Enter a valid Amount');
-        return;
-    }
     document.getElementById('feniDonationAmount').value = '';
-    if (isNaN(amount)) {
-        alert('Invalid Amount. Amount must be positive Integer');
-        return;
-    }
+
+    if (!validate(amount,balance)) return;
+
     amount = parseFloat(amount);
-    if (amount > balance) {
-        alert("Insufficient Balance!");
-        return;
-    }
-    if (amount <= 0) {
-        alert('Amount must be positive');
-        return;
-    }
+
     let totalDonation = document.getElementById('feniDonatedAmount').innerText;
     totalDonation = parseFloat(totalDonation)
+
     document.getElementById('feniDonatedAmount').innerText = amount + totalDonation
     document.getElementById('balance').innerText = balance - amount;
+
     const title = document.getElementById('FeniTitle').innerText;
-    createHistory(amount,title);
+    createHistory(amount, title);
+
     document.getElementById('modal').show();
 }
 
@@ -100,29 +105,20 @@ function handleQuotaDonation(event) {
     event.preventDefault()
     let amount = document.getElementById('quotaDonationAmount').value;
     let balance = parseFloat(document.getElementById('balance').innerText);
-    if (amount == '') {
-        alert('Please Enter a valid Amount');
-        return;
-    }
     document.getElementById('quotaDonationAmount').value = '';
-    if (isNaN(amount)) {
-        alert('Invalid Amount. Amount must be positive Integer');
-        return;
-    }
+
+    if (!validate(amount,balance)) return;
+
     amount = parseFloat(amount);
-    if (amount > balance) {
-        alert("Insufficient Balance!");
-        return;
-    }
-    if (amount <= 0) {
-        alert('Amount must be positive');
-        return;
-    }
+
     let totalDonation = document.getElementById('quotaDonatedAmount').innerText;
     totalDonation = parseFloat(totalDonation)
+
     document.getElementById('quotaDonatedAmount').innerText = amount + totalDonation
     document.getElementById('balance').innerText = balance - amount;
+
     const title = document.getElementById('QuotaTitle').innerText;
-    createHistory(amount,title);
+    createHistory(amount, title);
+
     document.getElementById('modal').show();
 }
